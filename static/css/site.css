@@ -1,0 +1,17 @@
+/* Simple styles for map popup and controls */
+#map { position: relative; }
+.ol-layer-switcher button { cursor: pointer; border: 0; background: transparent; padding: 6px 8px; }
+.ol-layer-switcher button.active { background: #007bff; color: white; border-radius: 4px; }
+
+.map-popup {
+  position: absolute;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.3);
+  padding: 8px;
+  min-width: 180px;
+  z-index: 2000;
+}
+.map-popup .popup-closer { position: absolute; top: 2px; right: 6px; text-decoration: none; font-size: 16px; }
+.map-popup .popup-title { font-weight: 600; margin-bottom: 4px; }
+.map-popup .popup-desc { font-size: 0.9em; color: #333; }

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="row">
+    <div class="col-md-8">
+        <h1>{{ period.name }}</h1>
+        {% if period.image %}
+          <img src="{{ period.image.url }}" alt="{{ period.name }}" class="img-fluid mb-3" />
+        {% endif %}
+        {% if period.description %}
+          <div class="period-description">
+            {{ period.description|linebreaks }}
+          </div>
+        {% else %}
+          <p><em>No description available for this period yet.</em></p>
+        {% endif %}
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Quick links</h5>
+          <a href="/destinations/?period={{ period.slug }}" class="btn btn-sm btn-primary">See related sites</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
