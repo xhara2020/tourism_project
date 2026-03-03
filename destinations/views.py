@@ -7,6 +7,8 @@ from .serializers import DestinationSerializer, CategorySerializer, BusinessSeri
 from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from django.shortcuts import get_object_or_404, render
+from django.http import JsonResponse
+from .offers import OFFERS, OFFERS_BY_SLUG
 
 
 class DestinationList(generics.ListAPIView):
@@ -118,3 +120,20 @@ def religious_page(request, slug):
         return render(request, template_name, {'monument_slug': slug})
     except TemplateDoesNotExist:
         raise Http404()
+
+
+def offers_json(request):
+    """Return a small JSON list of sample offers for the sidebar."""
+    return JsonResponse({'offers': OFFERS})
+
+
+def offers_list(request):
+    return render(request, 'offers_list.html', {'offers': OFFERS})
+
+
+def offer_page(request, slug):
+    offer = OFFERS_BY_SLUG.get(slug)
+    if not offer:
+        from django.http import Http404
+        raise Http404()
+    return render(request, 'offer_detail.html', {'offer': offer})

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Available Offers</h1>
+  <div class="list-group mt-3">
+    {% for o in offers %}
+      <a href="/offers/{{ o.slug }}/" class="list-group-item list-group-item-action">
+        <h5 class="mb-1">{{ o.title }}</h5>
+        <p class="mb-1 text-muted">{{ o.summary }}</p>
+      </a>
+    {% endfor %}
+  </div>
+{% endblock %}

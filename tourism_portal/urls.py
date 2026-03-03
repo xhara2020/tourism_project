@@ -13,6 +13,9 @@ urlpatterns = [
     path('destinations/<slug:slug>/', TemplateView.as_view(template_name='destination_detail.html'), name='destination-detail'),
     path('periods/<slug:slug>/', dest_views.period_page, name='period-page'),
     path('cities/<slug:slug>/', dest_views.city_page, name='city-page'),
+    path('offers/json/', dest_views.offers_json, name='offers-json'),
+    path('offers/', dest_views.offers_list, name='offers-list'),
+    path('offers/<slug:slug>/', dest_views.offer_page, name='offer-detail'),
     path('religious/<slug:slug>/', dest_views.religious_page, name='religious-page'),
 ]
 

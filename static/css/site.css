@@ -28,3 +28,67 @@
 /* City images shown at approximately 1/4 size for display */
 .city-img-quarter { width: 25%; height: auto; display: block; margin-bottom: 0.5rem; }
 .city-img-quarter.mb-2 { margin-bottom: 0.5rem; }
+
+/* Offers sidebar */
+#offers-sidebar { padding-top: 0.5rem; }
+#offers-sidebar .p-3 { position: sticky; top: 72px; border-radius: 6px; }
+#offers-sidebar .offer-item { padding: 8px 6px; border-bottom: 1px solid #eee; }
+#offers-sidebar .offer-item a { color: #007bff; text-decoration: none; }
+#offers-sidebar .offer-item a:hover { text-decoration: underline; }
+
+/* On small screens hide the sidebar (mobile will use offers list page) */
+@media (max-width: 767.98px) {
+  #offers-sidebar { display: none !important; }
+}
+
+/* Ads sidebar (right) - mirror of offers */
+#ads-sidebar { padding-top: 0.5rem; }
+#ads-sidebar .p-3 { position: sticky; top: 72px; border-radius: 6px; }
+#ads-sidebar .ad-item { padding: 8px 6px; border-bottom: 1px solid #eee; text-align: left; }
+#ads-sidebar .ad-item a { color: #007bff; text-decoration: none; font-weight: 600; }
+#ads-sidebar .ad-item .small { color: #6c757d; }
+
+@media (max-width: 767.98px) {
+  #ads-sidebar { display: none !important; }
+}
+
+/* Fullscreen map mode */
+#map.map-fullscreen {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 2147483646 !important;
+  background: #fff;
+}
+
+/* Footer styles */
+.site-footer { background:#222; color:#e6e6e6; padding:24px 0; margin-top:32px; }
+.site-footer .container { display:flex; gap:20px; align-items:flex-start; }
+.site-footer h5 { color:#fff; margin-bottom:8px; }
+.site-footer p { margin:0 0 8px 0; color:#cfcfcf; }
+.site-footer .footer-actions { margin-top:8px; }
+.site-footer .btn-footer { background:#007bff; color:#fff; border:0; padding:8px 12px; border-radius:4px; }
+.site-footer .btn-footer:focus { outline: none; box-shadow: 0 0 0 3px rgba(0,123,255,0.25); }
+
+/* Background image from media with a semi-transparent overlay.
+   Uses a media file named 'backgroud.jpg' placed under the project's MEDIA_ROOT.
+   Apply the class `bg-media-transparent` to any container (for example the <body>)
+   to enable the background. Adjust the overlay color/alpha as needed. */
+.bg-media-transparent {
+  background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url('/media/periods/images/background.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Alternative slightly darker overlay if you prefer text contrast */
+.bg-media-transparent--dark {
+  background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('/media/periods/images/background.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
