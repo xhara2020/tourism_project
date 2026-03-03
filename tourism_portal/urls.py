@@ -12,6 +12,8 @@ urlpatterns = [
     path('destinations/', TemplateView.as_view(template_name='destinations_list.html'), name='destinations-list'),
     path('destinations/<slug:slug>/', TemplateView.as_view(template_name='destination_detail.html'), name='destination-detail'),
     path('periods/<slug:slug>/', dest_views.period_page, name='period-page'),
+    path('cities/<slug:slug>/', dest_views.city_page, name='city-page'),
+    path('religious/<slug:slug>/', dest_views.religious_page, name='religious-page'),
 ]
 
 if settings.DEBUG:

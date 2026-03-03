@@ -195,30 +195,42 @@ document.addEventListener('DOMContentLoaded', function () {
     makeOverlayToggle('Business (Bar/Hotel/Restaurant)', bizLayer, true);
   }).catch(console.error);
 
-  // Populate Historical Periods menu from API
-  fetch('/api/periods/').then(r => r.ok ? r.json() : []).then(periods => {
-    const menu = document.getElementById('periods-menu');
-    if (!menu) return;
-    // Only replace static menu if API returned actual periods
-    if (periods && periods.length) {
-      menu.innerHTML = '';
-    }
-    if (!periods || periods.length === 0) {
+  // Populate Historical Periods as top-level nav links (fallback to static list)
+  (function populatePeriodsNav() {
+    const container = document.getElementById('periods-links');
+    if (!container) return;
+
+    function addLink(p) {
       const li = document.createElement('li');
-      li.innerHTML = '<a class="dropdown-item" href="#">No periods</a>';
-      menu.appendChild(li);
-      return;
-    }
-    periods.forEach(p => {
-      const li = document.createElement('li');
+      li.className = 'nav-item';
       const a = document.createElement('a');
-      a.className = 'dropdown-item';
+      a.className = 'nav-link';
       a.href = `/periods/${encodeURIComponent(p.slug)}/`;
-      a.innerText = p.name;
+      a.textContent = p.name || '';
       li.appendChild(a);
-      menu.appendChild(li);
+      // insert before the container span so links appear in-place
+      container.parentNode.insertBefore(li, container);
+    }
+
+    const fallback = [
+      {slug: 'prehistoric-period', name: 'Prehistoric Period'},
+      {slug: 'chalcolithic-bronze-iron-ages', name: 'Chalcolithic, Bronze and Iron Ages'},
+      {slug: 'hellenic-hellenistic-periods', name: 'Hellenic and Hellenistic Periods'},
+      {slug: 'roman-period', name: 'Roman Period'},
+      {slug: 'byzantine-period', name: 'Byzantine Period'},
+      {slug: 'medieval-pre-ottoman', name: 'Medieval Period (Pre-Ottoman)'},
+      {slug: 'ottoman-period', name: 'Ottoman Period'},
+      {slug: 'modern-period', name: 'Modern Period'}
+    ];
+
+    fetch('/api/periods/').then(r => r.ok ? r.json() : null).then(periods => {
+      if (periods && periods.length) {
+        periods.forEach(p => addLink(p));
+      } else {
+        fallback.forEach(p => addLink(p));
+      }
+    }).catch(() => {
+      fallback.forEach(p => addLink(p));
     });
-  }).catch(() => {
-    const menu = document.getElementById('periods-menu'); if (menu) menu.innerHTML = '<li><a class="dropdown-item">Error</a></li>';
-  });
+  })();
 });

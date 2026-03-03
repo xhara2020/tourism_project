@@ -83,3 +83,38 @@ def period_page(request, slug):
         # 'destinations': dests,
     }
     return render(request, 'period_detail.html', context)
+
+
+def city_page(request, slug):
+    """Render a simple city page. Try to load a `{slug}_detail.html` template.
+    Falls back to the legacy `city_detail.html` for Durrës variants. Raises 404
+    if no matching template exists."""
+    from django.http import Http404
+    from django.template import TemplateDoesNotExist
+    from django.template.loader import get_template
+
+    # Try a dedicated template like `apollonia_detail.html` or `durres_detail.html`
+    template_name = f"{slug}_detail.html"
+    try:
+        # will raise TemplateDoesNotExist if not found
+        get_template(template_name)
+        return render(request, template_name, {'city_slug': slug})
+    except TemplateDoesNotExist:
+        # keep backward compatibility for the existing Durrës template
+        if slug in ('durres', 'durrës', 'durr%C3%ABs'):
+            return render(request, 'city_detail.html', {'city_slug': slug})
+        raise Http404()
+
+
+def religious_page(request, slug):
+    """Render a religious monument page. Tries `religious_<slug>.html` template."""
+    from django.http import Http404
+    from django.template import TemplateDoesNotExist
+    from django.template.loader import get_template
+
+    template_name = f"religious_{slug}.html"
+    try:
+        get_template(template_name)
+        return render(request, template_name, {'monument_slug': slug})
+    except TemplateDoesNotExist:
+        raise Http404()

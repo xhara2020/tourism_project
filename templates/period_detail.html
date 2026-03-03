@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block body_class %}period-page{% endblock %}
 {% block content %}
   <div class="row">
     <div class="col-md-8">
@@ -14,13 +15,6 @@
           <p><em>No description available for this period yet.</em></p>
         {% endif %}
     </div>
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Quick links</h5>
-          <a href="/destinations/?period={{ period.slug }}" class="btn btn-sm btn-primary">See related sites</a>
-        </div>
-      </div>
-    </div>
+    <!-- quick links removed -->
   </div>
 {% endblock %}

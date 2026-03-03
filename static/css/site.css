@@ -15,3 +15,16 @@
 .map-popup .popup-closer { position: absolute; top: 2px; right: 6px; text-decoration: none; font-size: 16px; }
 .map-popup .popup-title { font-weight: 600; margin-bottom: 4px; }
 .map-popup .popup-desc { font-size: 0.9em; color: #333; }
+
+/* Hide the main map on period detail pages (we only want description) */
+.period-page #map { display: none !important; }
+
+/* Hide the main map on city detail pages */
+.city-page #map { display: none !important; }
+
+/* Hide the main map on religious monument pages */
+.religion-page #map { display: none !important; }
+
+/* City images shown at approximately 1/4 size for display */
+.city-img-quarter { width: 25%; height: auto; display: block; margin-bottom: 0.5rem; }
+.city-img-quarter.mb-2 { margin-bottom: 0.5rem; }
